@@ -14,18 +14,18 @@
             <div class="logo">
                 <a href="#">Book<span>ify</span></a>
             </div>
-            <div class="auth-buttons">
-                <a href="#" class="btn-auth btn-secondary">Register</a>
-                <a href="#" class="btn-auth btn-primary">Sign In</a>
-            </div>
-        </div>
-        
-        <nav class="navbar-bottom">
+            <nav class="navbar-inline">
             <a href="#" class="nav-item active"><i class="fa-solid fa-hotel"></i> All Hotels</a>
             <a href="#" class="nav-item"><i class="fa-solid fa-building"></i> Apartments</a>
             <a href="#" class="nav-item"><i class="fa-solid fa-umbrella-beach"></i> Resorts</a>
             <a href="#" class="nav-item"><i class="fa-solid fa-house-chimney-window"></i> Villas & Cabins</a>
         </nav>
+            <div class="auth-buttons">
+                <a href="#" class="btn-auth btn-login">Register</a>
+                <a href="#" class="btn-auth btn-register">Sign In</a
+            </div>
+        </div>
+        
     </header>
 
     <section class="hero-block">
@@ -36,7 +36,7 @@
             </div>
 
             <div class="search-container">
-                <form class="search-form" action="" method="POST">
+                <form class="search-form" action="" method="GET">
                     <div class="input-group">
                         <label><i class="fa-solid fa-bed"></i></label>
                         <input type="text" name="destination" placeholder="Where are you going?" required>
@@ -44,16 +44,20 @@
                     
                     <div class="input-group">
                         <label><i class="fa-solid fa-calendar-days"></i></label>
-                        <input type="text" name="check_in_out" placeholder="Check-in Date — Check-out Date" onfocus="(this.type='date')" required>
+                        <input type="text" name="check_in" placeholder="Check-in Date" onfocus="(this.type='date')" required>
                     </div>
+                    <div class="input-group">
+                        <label><i class="fa-solid fa-calendar-days"></i></label>
+                        <input id= type="text" name="check_in" placeholder="Check-out Date" onfocus="(this.type='date')" required>
 
+                    </div>
                     <div class="input-group">
                         <label><i class="fa-solid fa-user"></i></label>
                         <select name="guests">
-                            <option value="1">1 adult · 0 children · 1 room</option>
-                            <option value="2" selected>2 adults · 0 children · 1 room</option>
-                            <option value="3">3 adults · 0 children · 1 room</option>
-                            <option value="4+">4+ adults · 2 children · 2 rooms</option>
+                            <option value="1">1 guest</option>
+                            <option value="2" selected>2 guests</option>
+                            <option value="3">3 guests</option>
+                            <option value="4">4+ guests</option>
                         </select>
                     </div>
 
