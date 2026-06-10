@@ -3,84 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookify</title>
+    <title>Bookify | Find Hotels & Accommodations</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Icons using FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- Navigation Bar -->
-    <header class="navbar">
-        <div class="logo">
-            <a href="#">Book<span>ify</span></a>
-        </div>
-        <nav class="nav-links">
-            <a href="#" class="active">Home</a>
-            <a href="#">Hotels</a>
-            <a href="#">Deals</a>
-            <div class="auth-buttons">
-                <a href="#" class="link-login">Sign In</a>
-                <a href="#" class="btn-register">Register</a>
+    <header class="header-container">
+        <div class="navbar-top">
+            <div class="logo">
+                <a href="#">Book<span>ify</span></a>
             </div>
+            <div class="auth-buttons">
+                <a href="#" class="btn-auth btn-secondary">Register</a>
+                <a href="#" class="btn-auth btn-primary">Sign In</a>
+            </div>
+        </div>
+        
+        <nav class="navbar-bottom">
+            <a href="#" class="nav-item active"><i class="fa-solid fa-hotel"></i> All Hotels</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-building"></i> Apartments</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-umbrella-beach"></i> Resorts</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-house-chimney-window"></i> Villas & Cabins</a>
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="hero-content">
-            <h1>Find the Perfect Stay for Your Next Adventure</h1>
-            <p>Exclusive hotels, incredible locations, and prices tailored just for you.</p>
-        </div>
+    <section class="hero-block">
+        <div class="hero-wrapper">
+            <div class="hero-text">
+                <h1>Find your next stay</h1>
+                <p>Search deals on hotels, homes, and much more...</p>
+            </div>
 
-        <!-- Search Using Post Form -->
-        <!-- We are going to use post form to get results from database -->
-        <div class="search-container">
-    <form class="search-form" action="" method="POST">
-        
-        <div class="input-group">
-            <label for="destination"><i class="fa-solid fa-location-dot"></i> Destination</label>
-            <input type="text" name="destination" placeholder="Where are you going?" required>
-        </div>
-        
-        <div class="input-group">
-            <label for="checkIn"><i class="fa-solid fa-calendar-days"></i> Check-in</label>
-            <input type="date" name="check_in" required>
-        </div>
+            <div class="search-container">
+                <form class="search-form" action="" method="POST">
+                    <div class="input-group">
+                        <label><i class="fa-solid fa-bed"></i></label>
+                        <input type="text" name="destination" placeholder="Where are you going?" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label><i class="fa-solid fa-calendar-days"></i></label>
+                        <input type="text" name="check_in_out" placeholder="Check-in Date — Check-out Date" onfocus="(this.type='date')" required>
+                    </div>
 
-        <div class="input-group">
-            <label for="checkOut"><i class="fa-solid fa-calendar-days"></i> Check-out</label>
-            <input type="date" name="check_out" required>
-        </div>
+                    <div class="input-group">
+                        <label><i class="fa-solid fa-user"></i></label>
+                        <select name="guests">
+                            <option value="1">1 adult · 0 children · 1 room</option>
+                            <option value="2" selected>2 adults · 0 children · 1 room</option>
+                            <option value="3">3 adults · 0 children · 1 room</option>
+                            <option value="4+">4+ adults · 2 children · 2 rooms</option>
+                        </select>
+                    </div>
 
-        <div class="input-group">
-            <label for="Guests"><i class="fa-solid fa-user"></i> Guests</label>
-            <select name="guests">
-                <option value="1">1 Guest</option>
-                <option value="2" selected>2 Guests</option>
-                <option value="3">3 Guests</option>
-                <option value="4+">4+ Guests</option>
-            </select>
-        </div>
-
-        <button type="submit" name="submit_search" class="search-btn">
-            <i class="fa-solid fa-magnifying-glass"></i> Search
-        </button>
-    </form>
-</div>
-    </section>
-
-    <!-- Minimalist Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2026 Bookify. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Contact</a>
+                    <button type="submit" name="submit_search" class="search-btn">
+                        Search
+                    </button>
+                </form>
             </div>
         </div>
-    </footer>
+    </section>
+
+    <main class="page-content">
+        </main>
 
 </body>
 </html>
