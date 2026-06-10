@@ -48,7 +48,9 @@ body {
 /* Inline Navigation Rules */
 .navbar-inline {
   display: flex;
+  flex-direction: row;
   gap: 5px;
+  padding: 4px 0 10px 0;
 }
 
 .nav-item {

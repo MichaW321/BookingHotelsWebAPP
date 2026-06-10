@@ -14,18 +14,18 @@
             <div class="logo">
                 <a href="#">Book<span>ify</span></a>
             </div>
-            <div class="auth-buttons">
-                <a href="#" class="btn-auth btn-secondary">Register</a>
-                <a href="#" class="btn-auth btn-primary">Sign In</a>
-            </div>
-        </div>
-        
-        <nav class="navbar-bottom">
+            <nav class="navbar-inline">
             <a href="#" class="nav-item active"><i class="fa-solid fa-hotel"></i> All Hotels</a>
             <a href="#" class="nav-item"><i class="fa-solid fa-building"></i> Apartments</a>
             <a href="#" class="nav-item"><i class="fa-solid fa-umbrella-beach"></i> Resorts</a>
             <a href="#" class="nav-item"><i class="fa-solid fa-house-chimney-window"></i> Villas & Cabins</a>
         </nav>
+            <div class="auth-buttons">
+                <a href="#" class="btn-auth btn-login">Register</a>
+                <a href="#" class="btn-auth btn-register">Sign In</a
+            </div>
+        </div>
+        
     </header>
 
     <section class="hero-block">
