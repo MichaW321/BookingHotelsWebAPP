@@ -36,7 +36,7 @@
             </div>
 
             <div class="search-container">
-                <form class="search-form" action="" method="POST">
+                <form class="search-form" action="" method="GET">
                     <div class="input-group">
                         <label><i class="fa-solid fa-bed"></i></label>
                         <input type="text" name="destination" placeholder="Where are you going?" required>
@@ -44,16 +44,20 @@
                     
                     <div class="input-group">
                         <label><i class="fa-solid fa-calendar-days"></i></label>
-                        <input type="text" name="check_in_out" placeholder="Check-in Date — Check-out Date" onfocus="(this.type='date')" required>
+                        <input type="text" name="check_in" placeholder="Check-in Date" onfocus="(this.type='date')" required>
                     </div>
+                    <div class="input-group">
+                        <label><i class="fa-solid fa-calendar-days"></i></label>
+                        <input id= type="text" name="check_in" placeholder="Check-out Date" onfocus="(this.type='date')" required>
 
+                    </div>
                     <div class="input-group">
                         <label><i class="fa-solid fa-user"></i></label>
                         <select name="guests">
-                            <option value="1">1 adult · 0 children · 1 room</option>
-                            <option value="2" selected>2 adults · 0 children · 1 room</option>
-                            <option value="3">3 adults · 0 children · 1 room</option>
-                            <option value="4+">4+ adults · 2 children · 2 rooms</option>
+                            <option value="1">1 guest</option>
+                            <option value="2" selected>2 guests</option>
+                            <option value="3">3 guests</option>
+                            <option value="4">4+ guests</option>
                         </select>
                     </div>
 
