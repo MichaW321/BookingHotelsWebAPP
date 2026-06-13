@@ -11,6 +11,7 @@ try{
   $temp=new PDO("mysql:host=$host",$user,$pass);
   $temp->setAttribute(PDO::ATTR_ERRMODE , PDO::ERRMODE_EXCEPTION);
   $temp->exec("CREATE DATABASE IF NOT EXISTS `$db` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
+  echo("Success");
 }
 catch (PDOException $e){
   die("Error creating database: ". $e->getMessage());
@@ -109,6 +110,7 @@ $queries=[
   foreach($queries as $query){
     $pdo->exec($query);
   }
+  echo("Success");
 }
 catch(PDOException $e){
   die("Error creating tables ".$e->getMessage());

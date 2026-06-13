@@ -10,8 +10,7 @@
 <body>
 
 <?php
-require_once '../config/connection.php';
-$db = Connection::connect();
+require_once '../config/database.php';
 ?>
 
     <header class="header-container">
