@@ -221,3 +221,112 @@ body {
   max-width: 1340px;
   margin: 0 auto;
 }
+
+/* --- REGISTRATION AND AUTHENTICATION STYLES --- */
+
+/* Centering and positioning the registration card on the screen */
+.auth-page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 60px !important; /* Resetting padding to prevent the card from dropping too low */
+  min-height: calc(100vh - 80px);
+}
+
+/* Elegant white card container with a subtle shadow */
+.auth-card {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 460px;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+  border: 1px solid #e2e8f0;
+}
+
+.auth-card-header {
+  text-align: left;
+  margin-bottom: 28px;
+}
+
+.auth-card-header h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #00224d; /* Brand dark blue */
+  letter-spacing: -0.5px;
+}
+
+.auth-card-header p {
+  font-size: 14px;
+  color: #64748b; /* Slate grey for secondary text */
+  margin-top: 6px;
+}
+
+/* Vertical layout configuration for form fields */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Customizing the native .input-group class for isolated form requirements */
+.input-group.auth-input {
+  border: 1px solid #cbd5e1; /* Adding a border since the card is not placed on the yellow bar */
+  border-radius: 6px;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+/* Visual effect triggered when a user focuses inside an input field */
+.input-group.auth-input:focus-within {
+  border-color: #006ce4; /* Accent light blue color */
+  box-shadow: 0 0 0 3px rgba(0, 108, 228, 0.15);
+}
+
+/* Adapting the main search button to act as a full-width form button */
+.search-btn.auth-btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  margin-top: 8px;
+  text-align: center;
+  justify-content: center;
+}
+
+/* Styling block for registration error alerts (e.g., invalid input data) */
+.auth-error-msg {
+  background-color: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: #991b1b;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.auth-error-msg i {
+  font-size: 16px;
+}
+
+/* Links and alternative action text at the bottom of the card */
+.auth-card-footer {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 14px;
+  color: #64748b;
+}
+
+.auth-card-footer a {
+  color: #006ce4;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-card-footer a:hover {
+  text-decoration: underline;
+}
