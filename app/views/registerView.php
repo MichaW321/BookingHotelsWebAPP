@@ -33,18 +33,21 @@
                 <h2>Create an account</h2>
                 <p>Join Bookify today and find your next perfect stay.</p>
             </div>
-
-            <?php if (isset($error) && !empty($error)): ?>
-                <div class="auth-error-msg">
-                    <i class="fa-solid fa-circle-exclamation"></i> <?= htmlspecialchars($error) ?>
-                </div>
-            <?php endif; ?>
-
             <form action="index.php?action=register" method="POST" class="auth-form">
                 
                 <div class="input-group auth-input">
                     <label for="username"><i class="fa-solid fa-user"></i></label>
                     <input type="text" id="username" name="username" placeholder="Username" required autocomplete="username">
+                </div>
+
+                <div class="input-group auth-input">
+                    <label for="first-name"><i class="fa-solid fa-user"></i></label>
+                    <input type="text" id="first-name" name="first-name" placeholder="First name" required autocomplete="fist-name">
+                </div>
+
+                <div class="input-group auth-input">
+                    <label for="last-name"><i class="fa-solid fa-user"></i></label>
+                    <input type="text" id="last-name" name="last-name" placeholder="Last name" required autocomplete="last-name">
                 </div>
 
                 <div class="input-group auth-input">
@@ -55,6 +58,11 @@
                 <div class="input-group auth-input">
                     <label for="password"><i class="fa-solid fa-lock"></i></label>
                     <input type="password" id="password" name="password" placeholder="Password" required autocomplete="new-password">
+                </div>
+
+                <div class="input-group auth-input">
+                    <label for="confirm-password"><i class="fa-solid fa-lock"></i></label>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password" required autocomplete="confirm-password">
                 </div>
 
                 <button type="submit" name="submit_register" class="search-btn auth-btn">

@@ -2,6 +2,12 @@
 require_once '../app/controllers/homeController.php';
 require_once '../app/controllers/authController.php';
 
+require_once '../app/models/userModel.php';
+
+require_once '../config/database.php';
+
+$db=Connection::connect();
+
 $action=$_GET['action'] ?? 'home';
 
 switch($action){
@@ -11,8 +17,8 @@ switch($action){
     break;
     
     case 'register':
-    $authController = new authController();
-    $authController->showRegisterForm();
+    $authController = new authController($db);
+    $authController->register();
     break;
 }
 ?>
