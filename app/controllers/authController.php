@@ -6,11 +6,10 @@ class authController{
 
   public function __construct(PDO $db){
     $this->user=new userModel($db);
-
   }
 
-  public function showRegisterForm(){
-    require_once '../app/views/registerView.php';
+  public function showLoginForm(){
+    require_once '../app/views/loginView.php';
   }
   
   public function register() {
@@ -24,28 +23,57 @@ class authController{
      $confirmPassword=$_POST['confirm-password'];
 
      if($password!=$confirmPassword){
-      die("Passwords don't match");
+      $error="Passwords don't match";
+      require_once '../app/views/registerView.php';
+      return;
      }
      if(strlen($password)<8){
-      die("Password should be at least 8 characters");
+      $error="Password should be at least 8 characters";
+      require_once '../app/views/registerView.php';
+      return;
      }
      if (empty($username) || empty($firstName) || empty($lastName) || empty($email) || empty($password)) {
-      die("All fields are required");
+      $error="All fields are required";
+      require_once '../app/views/registerView.php';
+      return ;
      }
 
      if($this->user->existsUser($username,$email)){
-      die("User already exists");
+      $error="User already exists";
+      require_once '../app/views/registerView.php';
+      return;
      }
 
      $result=$this->user->insertUser($username,$firstName,$lastName,$email,$password);
 
      if($result){
-      header("Location: index.php");
+      header("Location: index?action=login.php");
       exit();
      } else { die("Problem creating new user");}
-     } else {$this->showRegisterForm();}
+     } else {
+      $this->showRegisterForm();
+      }
+  }
+  public function showRegisterForm(){
+    require_once '../app/views/registerView.php';
   }
 
+public function login() {
+    if($_SERVER['REQUEST_METHOD']=='POST'){
+      $username=trim($_POST['username'] ?? '');  // this is basically the same as asking if(isset())
+      $password=$_POST['password'] ?? '';
+
+      if(empty($username) || empty($password)){
+        $errorLogin="Please fill out both fields";
+        require_once '../app/views/loginView.php';
+        return;
+      }
+    } else {
+      $this->showLoginForm();
+    }
+  }
 }
+
+
 
 ?>

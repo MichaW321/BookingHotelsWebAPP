@@ -21,7 +21,7 @@
                 <a href="#" class="nav-item"><i class="fa-solid fa-house-chimney-window"></i> Villas & Cabins</a>
             </nav>
             <div class="auth-buttons">
-                <a href="index.php?action=login" class="btn-auth btn-register">Login</a>
+                <a href="index.php?action=register" class="btn-auth btn-register">Register</a>
             </div>
         </div>
     </header>
@@ -33,30 +33,15 @@
                 <h2>Create an account</h2>
                 <p>Join Bookify today and find your next perfect stay.</p>
             </div>
-            <form action="index.php?action=register" method="POST" class="auth-form">
+            <form action="index.php?action=login" method="POST" class="auth-form">
                 <span class="registerError">
-                <?php if (!empty($error)): ?>
-                        <span class="registerError"><?php echo htmlspecialchars($error); ?></span>
+                <?php if (!empty($errorLogn)): ?>
+                        <span class="registerError"><?php echo htmlspecialchars($errorLogin); ?></span>
                 <?php endif; ?>
                 </span>
                 <div class="input-group auth-input">
                     <label for="username"><i class="fa-solid fa-user"></i></label>
-                    <input type="text" id="username" name="username" placeholder="Username" required autocomplete="username">
-                </div>
-
-                <div class="input-group auth-input">
-                    <label for="first-name"><i class="fa-solid fa-user"></i></label>
-                    <input type="text" id="first-name" name="first-name" placeholder="First name" required autocomplete="fist-name">
-                </div>
-
-                <div class="input-group auth-input">
-                    <label for="last-name"><i class="fa-solid fa-user"></i></label>
-                    <input type="text" id="last-name" name="last-name" placeholder="Last name" required autocomplete="last-name">
-                </div>
-
-                <div class="input-group auth-input">
-                    <label for="email"><i class="fa-solid fa-envelope"></i></label>
-                    <input type="email" id="email" name="email" placeholder="Email address" required autocomplete="email">
+                    <input type="text" id="username" name="username" placeholder="Username" required autocomplete="off">
                 </div>
 
                 <div class="input-group auth-input">
@@ -64,18 +49,13 @@
                     <input type="password" id="password" name="password" placeholder="Password" required autocomplete="new-password">
                 </div>
 
-                <div class="input-group auth-input">
-                    <label for="confirm-password"><i class="fa-solid fa-lock"></i></label>
-                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password" required autocomplete="confirm-password">
-                </div>
-
-                <button type="submit" name="submit_register" class="search-btn auth-btn">
-                    Register
+                <button type="submit" name="submit_login" class="search-btn auth-btn">
+                    Login
                 </button>
             </form>
 
             <div class="auth-card-footer">
-                <p>Already have an account? <a href="index.php?action=login">Sign In</a></p>
+                <p>Don't have an account? <a href="index.php?action=register">Register</a></p>
             </div>
         </div>
 

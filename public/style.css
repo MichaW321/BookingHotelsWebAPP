@@ -330,3 +330,25 @@ body {
 .auth-card-footer a:hover {
   text-decoration: underline;
 }
+
+.registerError {
+  display: block;
+  color: #de350b;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 0px;
+  text-align: left;
+  padding-left: 2px;
+
+  /* Samo blagi fade-in tekst bez pomeranja i boksova */
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

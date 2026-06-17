@@ -21,7 +21,7 @@
         </nav>
             <div class="auth-buttons">
                 <a href="index.php?action=register" class="btn-auth btn-login">Register</a>
-                .<a href="#" class="btn-auth btn-register">Sign In</a
+                .<a href="index.php?action=login" class="btn-auth btn-register">Sign In</a
             </div>
         </div>
         

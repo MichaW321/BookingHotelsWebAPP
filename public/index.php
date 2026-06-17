@@ -20,5 +20,9 @@ switch($action){
     $authController = new authController($db);
     $authController->register();
     break;
+
+    case 'login':
+    $authController = new authController($db);    
+    $authController->login();
 }
 ?>

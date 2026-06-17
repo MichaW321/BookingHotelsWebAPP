@@ -16,7 +16,7 @@ class userModel {
       ':email' => $email 
     ]);
 
-    // IF we can write in 1 line of code , it looks cooler and simpler.
+    // IF that we can write in 1 line of code , it looks cooler and simpler.
     return $stmt->fetch() ? true : false;
   }
 
@@ -35,6 +35,12 @@ class userModel {
     ]);
 
     return $result;
+  }
+
+  public function getUserByUsername($username) {
+    $stmt=$this->db->prepare("SELECT * FROM users WHERE username = :username");
+    $stmt->execute([':username' => $username]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
   }
 }
 
