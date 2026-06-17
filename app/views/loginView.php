@@ -34,8 +34,8 @@
                 <p>Join Bookify today and find your next perfect stay.</p>
             </div>
             <form action="index.php?action=login" method="POST" class="auth-form">
-                <span class="registerError">
-                <?php if (!empty($errorLogn)): ?>
+              <span class="registerError">
+                <?php if (!empty($errorLogin)): ?>
                         <span class="registerError"><?php echo htmlspecialchars($errorLogin); ?></span>
                 <?php endif; ?>
                 </span>

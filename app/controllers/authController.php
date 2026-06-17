@@ -68,6 +68,18 @@ public function login() {
         require_once '../app/views/loginView.php';
         return;
       }
+      $modelUser=$this->user->getUserByUsername($username);
+      if(($modelUser) && (password_verify($password,$modelUser['password']))) {
+          $_SESSION['id']=$modelUser['id'];
+          $_SESSION['username']=$modelUser['username'];
+
+          header("Location: index.php?action=home");
+          exit();
+      } else {
+        $errorLogin="Username and password don't match";
+        require_once '../app/views/loginView.php';
+        return;
+      }
     } else {
       $this->showLoginForm();
     }
