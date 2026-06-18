@@ -60,6 +60,16 @@
         </div>
 
     </main>
-
+<footer class="footer">
+  <div class="footer-logo">
+    <a href="index.php">Book<span>ify</span></a>
+  </div>
+  <p class="footer-copy">© 2024 Bookify. All rights reserved.</p>
+  <nav class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Use</a>
+    <a href="#">Support</a>
+  </nav>
+</footer>
 </body>
 </html>

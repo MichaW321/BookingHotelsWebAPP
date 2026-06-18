@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+echo "<script src='script.js'></script>";
+
 require_once '../app/controllers/homeController.php';
 require_once '../app/controllers/authController.php';
 
@@ -31,6 +33,10 @@ switch($action){
     case 'logout':
     $authController= new authController($db);
     $authController->logout();
+    break;
+
+    case 'logoutConfirm':
+    require_once '../app/views/confirmLogout.php';  
     break;
 }
 ?>

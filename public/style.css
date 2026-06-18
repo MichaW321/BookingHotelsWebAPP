@@ -352,3 +352,155 @@ body {
     opacity: 1;
   }
 }
+
+/* --- LOGOUT PAGE --- */
+.logout-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 63px);
+  padding: 40px 10%;
+  background-color: #f1f5f9;
+}
+
+.logout-card {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 420px;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+  border: 1px solid #e2e8f0;
+  text-align: center;
+}
+
+.logout-icon-box {
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 24px;
+  background-color: #fef2f2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logout-icon-box i {
+  font-size: 28px;
+  color: #174170;
+}
+
+.logout-card h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #00224d;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+
+.logout-buttons-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.btn-logout {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  font-family: "Open Sans", sans-serif;
+}
+
+.btn-confirm-yes {
+  background-color: #991b1b;
+  color: #ffffff;
+  border: 1px solid #991b1b;
+}
+
+.btn-confirm-yes:hover {
+  background-color: #7f1d1d;
+  border-color: #7f1d1d;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+.btn-confirm-no {
+  background-color: #ffffff;
+  color: #00224d;
+  border: 1px solid #cbd5e1;
+}
+
+.btn-confirm-no:hover {
+  background-color: #f8fafc;
+  border-color: #94a3b8;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* --- FOOTER --- */
+.footer {
+  background-color: #00224d;
+  border-top: 1px solid #00122c;
+  padding: 16px 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+
+  /* Hidden by default */
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(100%);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.footer.footer-visible {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+
+.footer-logo a {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+.footer-logo a span {
+  color: #ffb700;
+}
+
+.footer-copy {
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-links a {
+  font-size: 13px;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+}

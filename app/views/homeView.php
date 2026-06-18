@@ -21,7 +21,7 @@
         </nav>
         <?php if(isset($_SESSION['id'])): ?>
             <div class="auth-buttons">
-                <a href="index.php?action=logout" class="btn-auth btn-register">Logout</a
+                <a href="index.php?action=logoutConfirm" class="btn-auth btn-register">Logout</a
             </div>
         <?php else: ?>
             <div class="auth-buttons">
@@ -75,7 +75,19 @@
     </section>
 
     <main class="page-content">
-        </main>
+    </main>
+
+<footer class="footer">
+  <div class="footer-logo">
+    <a href="index.php">Book<span>ify</span></a>
+  </div>
+  <p class="footer-copy">© 2024 Bookify. All rights reserved.</p>
+  <nav class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Use</a>
+    <a href="#">Support</a>
+  </nav>
+</footer>
 
 </body>
 </html>
