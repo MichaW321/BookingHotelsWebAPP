@@ -19,10 +19,16 @@
             <a href="#" class="nav-item"><i class="fa-solid fa-umbrella-beach"></i> Resorts</a>
             <a href="#" class="nav-item"><i class="fa-solid fa-house-chimney-window"></i> Villas & Cabins</a>
         </nav>
+        <?php if(isset($_SESSION['id'])): ?>
+            <div class="auth-buttons">
+                <a href="index.php?action=logout" class="btn-auth btn-register">Logout</a
+            </div>
+        <?php else: ?>
             <div class="auth-buttons">
                 <a href="index.php?action=register" class="btn-auth btn-login">Register</a>
-                .<a href="index.php?action=login" class="btn-auth btn-register">Sign In</a
+                <a href="index.php?action=login" class="btn-auth btn-register">Sign In</a
             </div>
+        <?php endif; ?>       
         </div>
         
     </header>

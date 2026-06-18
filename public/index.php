@@ -26,5 +26,11 @@ switch($action){
     case 'login':
     $authController = new authController($db);    
     $authController->login();
+    break;
+
+    case 'logout':
+    $authController= new authController($db);
+    $authController->logout();
+    break;
 }
 ?>

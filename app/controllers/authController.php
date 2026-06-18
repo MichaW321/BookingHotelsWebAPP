@@ -7,12 +7,13 @@ class authController{
   public function __construct(PDO $db){
     $this->user=new userModel($db);
   }
-
-  public function showLoginForm(){
-    require_once '../app/views/loginView.php';
-  }
   
   public function register() {
+    if($this->isLoggedIn()){
+      header("Location: index.php?action=home");
+      exit;
+    }
+    
     if($_SERVER['REQUEST_METHOD']=='POST'){
       
      $username=trim($_POST['username']);
@@ -58,7 +59,17 @@ class authController{
     require_once '../app/views/registerView.php';
   }
 
-public function login() {
+  public function showLoginForm(){
+    require_once '../app/views/loginView.php';
+  }
+
+  public function login() {
+
+    if($this->isLoggedIn()){
+      header("Location: index.php?action=home");
+      exit;
+    }
+
     if($_SERVER['REQUEST_METHOD']=='POST'){
       $username=trim($_POST['username'] ?? '');  // this is basically the same as asking if(isset())
       $password=$_POST['password'] ?? '';
@@ -68,6 +79,7 @@ public function login() {
         require_once '../app/views/loginView.php';
         return;
       }
+
       $modelUser=$this->user->getUserByUsername($username);
       if(($modelUser) && (password_verify($password,$modelUser['password']))) {
           $_SESSION['id']=$modelUser['id'];
@@ -82,6 +94,22 @@ public function login() {
       }
     } else {
       $this->showLoginForm();
+    }
+  }
+  
+  public function isLoggedIn() {
+    return isset($_SESSION['id']);
+  }
+  
+  public function logout() {
+    if($this->isLoggedIn()){
+      $_SESSION=array();
+      session_destroy();
+      header("Location: index.php?action=home");
+      exit();
+    }
+    else {
+      header("Location: index.php?action=home");
     }
   }
 }
