@@ -55,13 +55,19 @@ class authController{
       $this->showRegisterForm();
       }
   }
+
+
   public function showRegisterForm(){
     require_once '../app/views/registerView.php';
   }
 
+
+
   public function showLoginForm(){
     require_once '../app/views/loginView.php';
   }
+
+
 
   public function login() {
 
@@ -96,20 +102,24 @@ class authController{
       $this->showLoginForm();
     }
   }
+
   
   public function isLoggedIn() {
     return isset($_SESSION['id']);
   }
+
+  
   
   public function logout() {
     if($this->isLoggedIn()){
       $_SESSION=array();
       session_destroy();
       header("Location: index.php?action=home");
-      exit();
+      exit;
     }
     else {
       header("Location: index.php?action=home");
+      exit;
     }
   }
 }

@@ -59,6 +59,7 @@ $queries=[
   "CREATE TABLE IF NOT EXISTS hotel_image(
   id int auto_increment not null,
   image varchar(255) not null,
+  path varchar(255) not null,
   hotel_id int not null,
   primary key(id),
   foreign key(hotel_id) references hotel(id)
@@ -79,6 +80,7 @@ $queries=[
   "CREATE TABLE IF NOT EXISTS room_image(
   id int auto_increment not null,
   image varchar(255) not null,
+  path varchar(255) not null,
   room_id int not null,
   primary key(id),
   foreign key(room_id) references room(id)
@@ -94,6 +96,7 @@ $queries=[
     role ENUM('user', 'admin', 'manager') NOT NULL DEFAULT 'user',
     PRIMARY KEY (id)
   ) ENGINE=InnoDB;",
+
   "CREATE TABLE IF NOT EXISTS reservation (
     id INT AUTO_INCREMENT NOT NULL,
     user_id INT NOT NULL,
