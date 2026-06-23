@@ -7,14 +7,15 @@ class homeController {
         $this->hotel = new hotelModel($db); 
       }
       public function index() {
-        require_once '../app/views/homeView.php';
+        $rooms = $this->getRooms();
+        
+        include_once '../app/views/homeView.php';
       }
 
       public function getRooms () {
       $rooms=$this->hotel->homeViewRooms();
-      foreach ($rooms as $room) {
-        echo $room['id'] .' '. $room['image'] . "</br>";
+      
+      return $rooms;
       }
     }
-}
 ?>

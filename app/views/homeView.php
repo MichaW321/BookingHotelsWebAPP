@@ -74,14 +74,54 @@
         </div>
     </section>
 
-    <main class="page-content">
-    </main>
+<main class="page-content">
+  <?php if (!empty($rooms)): ?>
+    <div class="section-header">
+      <h2 class="section-title">Most visited rooms</h2>
+      <span class="section-sub">Trending this week</span>
+    </div>
+    <div class="rooms-grid">
+      <?php foreach ($rooms as $room): ?>
+        <div class="room-card">
+          <div class="room-img-placeholder">
+            <img src="<?=$room['path']?>" alt="<?=$room['image']?>">
+            <i class="fa-solid fa-bed"></i>
+          </div>
+          <div class="room-body">
+            <span class="room-badge">
+              <i class="fa-solid fa-hotel"></i>
+            </span>
+            <p class="room-name"><?= htmlspecialchars($room['type']) ?></p>
+            <div class="room-stars">★★★★★</div>
+            <div class="room-meta">
+              <span><i class="fa-solid fa-bed"></i> <?= htmlspecialchars($room['beds']) ?> beds</span>
+              <?php if ($room['balcony']): ?>
+                <span><i class="fa-solid fa-door-open"></i> Balcony</span>
+              <?php else: ?>
+                <span><i class="fa-solid fa-xmark"></i> No balcony</span>
+              <?php endif; ?>
+            </div>
+            <div class="room-footer">
+              <div class="room-price">
+                $<?= htmlspecialchars($room['pricePerNight']) ?>
+                <small>/ night</small>
+              </div>
+              <a href="index.php?action=book&room=<?= $room['id'] ?>" class="search-btn" style="padding: 8px 16px; font-size: 13px; border-radius: 6px; text-decoration: none;">
+                Book now
+              </a>
+            </div>
+          </div>
+        </div>
+      <?php endforeach; ?>
+    </div>
+  <?php endif; ?>
+</main>
 
 <footer class="footer">
   <div class="footer-logo">
     <a href="index.php">Book<span>ify</span></a>
   </div>
-  <p class="footer-copy">© 2024 Bookify. All rights reserved.</p>
+  <p class="footer-copy">© 2026 Bookify. All rights reserved.</p>
   <nav class="footer-links">
     <a href="#">Privacy Policy</a>
     <a href="#">Terms of Use</a>

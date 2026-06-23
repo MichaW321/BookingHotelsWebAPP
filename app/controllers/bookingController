@@ -1,0 +1,11 @@
+<?php
+
+class bookingController {
+  private bookingModel $booking;
+
+  public function __construct(PDO $db) {
+      $this->booking = new bookingModel($db);
+  }
+}
+
+?>

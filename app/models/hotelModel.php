@@ -9,8 +9,7 @@ class hotelModel {
 
   public function homeViewRooms () {
 
-    $queryRoom="SELECT * FROM room INNER JOIN room_image
-    WHERE room.id=room_image.room_id";
+    $queryRoom="SELECT * FROM room INNER JOIN room_image ON room.id=room_image.room_id GROUP BY room.id HAVING min(room_image.id) limit 8";
 
     $stmt=$this->db->query($queryRoom);
     
