@@ -41,5 +41,14 @@ switch($action){
     case 'logoutConfirm':
     require_once '../app/views/confirmLogout.php';  
     break;
+
+    case 'book':
+    $bookingController= new bookingController($db);
+    if(!($bookingController->isLoggedIn())){
+        header("Location: index.php?action=login");
+        exit;
+    }
+    $bookingController->showBookingForm();
+    break;
 }
 ?>
