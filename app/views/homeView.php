@@ -84,14 +84,20 @@
       <?php foreach ($rooms as $room): ?>
         <div class="room-card">
           <div class="room-img-placeholder">
-            <img src="<?=$room['path']?>" alt="<?=$room['image']?>">
-            <i class="fa-solid fa-bed"></i>
+            <img src="<?=$room['room_path']?>" alt="<?=$room['room_image']?>">
           </div>
           <div class="room-body">
             <span class="room-badge">
               <i class="fa-solid fa-hotel"></i>
             </span>
             <p class="room-name"><?= htmlspecialchars($room['type']) ?></p>
+            <div class="room-location">
+              <i class="fa-solid fa-location-dot"></i>
+                  <?= htmlspecialchars($room['nameCo']) ?>
+                  <?php echo", "?>
+                  <?= htmlspecialchars($room['nameCi']) ?>
+            </div>
+
             <div class="room-stars">★★★★★</div>
             <div class="room-meta">
               <span><i class="fa-solid fa-bed"></i> <?= htmlspecialchars($room['beds']) ?> beds</span>

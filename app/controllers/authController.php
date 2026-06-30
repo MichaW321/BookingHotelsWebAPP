@@ -48,8 +48,8 @@ class authController{
      $result=$this->user->insertUser($username,$firstName,$lastName,$email,$password);
 
      if($result){
-      header("Location: index?action=login.php");
-      exit();
+      header("Location: index.php?action=login");
+      exit;
      } else { die("Problem creating new user");}
      } else {
       $this->showRegisterForm();

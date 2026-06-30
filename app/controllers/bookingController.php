@@ -13,12 +13,15 @@ class bookingController {
 
   function showBookingForm(){
     $id=$_GET['room'];
-
-    $roomAndHotel=$this->booking->getRoomAndHotelByID($id);
-    $images=$this->booking->getRoomAndHotelImagesByID($id);
-
-    echo $id;
-    echo $roomAndHotel['name'];
+    if(!($this->booking->isRoomBooked($id))){
+      header("Location: index.php?action=home");
+      exit();
+    }
+   $roomsAndHotels=$this->booking->getRoomAndHotelByID($id);
+   $roomImage=$this->booking->getRoomImagesByID($id); 
+   $hotelImage=$this->booking->getHotelImagesByID($id);
+   
+   include_once '../app/views/bookingView.php';
   }
 }
 
