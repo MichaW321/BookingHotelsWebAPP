@@ -50,5 +50,14 @@ switch($action){
     }
     $bookingController->showBookingForm();
     break;
+
+    case 'confirmBooking' :
+    $bookingController = new bookingController($db);
+    if(!($bookingController->isLoggedIn())){
+        header("Location: index.php?action=login");
+        exit;
+    }
+    $bookingController->showConfirmForm();    
+    break;
 }
 ?>

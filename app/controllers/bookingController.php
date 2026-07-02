@@ -17,11 +17,21 @@ class bookingController {
       header("Location: index.php?action=home");
       exit();
     }
-   $roomsAndHotels=$this->booking->getRoomAndHotelByID($id);
-   $roomImage=$this->booking->getRoomImagesByID($id); 
-   $hotelImage=$this->booking->getHotelImagesByID($id);
+   $roomAndHotel=$this->booking->getRoomAndHotelByID($id);
+   $roomImages=$this->booking->getRoomImagesByID($id); 
+   $hotelImages=$this->booking->getHotelImagesByID($id);
    
    include_once '../app/views/bookingView.php';
+  }
+
+  function showConfirmForm() {
+    $id=$_GET['room'];
+    $roomAndHotel=$this->booking->getRoomAndHotelByID($id);
+    $roomImages=$this->booking->getRoomImagesByID($id); 
+    $hotelImages=$this->booking->getHotelImagesByID($id);
+    
+    include_once '../app/views/confirmBookingView.php';
+
   }
 }
 

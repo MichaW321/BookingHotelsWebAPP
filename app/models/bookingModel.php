@@ -43,7 +43,7 @@ class bookingModel{
             ";
     $stmt=$this->db->prepare($query);
     $stmt->execute([':id'=> $id]);
-    return $stmt->fetchAll();
+    return $stmt->fetch();
  }
  
   public function getRoomImagesByID($id){

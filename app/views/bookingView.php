@@ -90,12 +90,12 @@
                     </div>
                     <div>
                         <div class="hotel-info-name"><?= htmlspecialchars($roomAndHotel['hotel_name']) ?></div>
-                        <div class="hotel-info-type"><?= htmlspecialchars($roomAndHotel['hotel_type']) ?></div>
+                        <div class="hotel-info-type"><?= htmlspecialchars($roomAndHotel['hotel.type']) ?></div>
                     </div>
                 </div>
                 <div class="hotel-contacts">
-                    <div class="contact-item"><i class="fa-solid fa-envelope"></i> <?= htmlspecialchars($roomAndHotel['email']) ?></div>
-                    <div class="contact-item"><i class="fa-solid fa-phone"></i> <?= htmlspecialchars($roomAndHotel['phone']) ?></div>
+                    <div class="contact-item"><i class="fa-solid fa-envelope"></i> <?= htmlspecialchars($roomAndHotel['hotel.email']) ?></div>
+                    <div class="contact-item"><i class="fa-solid fa-phone"></i> <?= htmlspecialchars($roomAndHotel['hotel.phone']) ?></div>
                 </div>
             </div>
 
@@ -105,13 +105,13 @@
         <div class="booking-sidebar">
             <div class="booking-card">
                 <div class="booking-price-row">
-                    <span class="booking-price-big">$<?= htmlspecialchars($roomAndHotel['pricePerNight']) ?></span>
+                    <span class="booking-price-big">$<?= htmlspecialchars($roomAndHotel['room_price']) ?></span>
                     <span class="booking-price-night">/ night</span>
                 </div>
 
                 <span class="badge-available"><i class="fa-solid fa-circle-check"></i> Available</span>
 
-                <form action="index.php?action=confirmBooking" method="POST">
+                <form action="index.php?action=confirmBooking" method="GET">
                     <input type="hidden" name="room_id" value="<?= htmlspecialchars($_GET['room']) ?>">
 
                     <div class="booking-form-group">
