@@ -59,5 +59,13 @@ switch($action){
     }
     $bookingController->showConfirmForm();    
     break;
+
+    case 'privacy' :
+    require_once '../app/views/privacyPolicyView.php';
+    break;
+
+    case 'terms':
+    require_once '../app/views/termsView.php';
+    break;
 }
 ?>

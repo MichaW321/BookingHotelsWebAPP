@@ -111,19 +111,9 @@
 
                 <span class="badge-available"><i class="fa-solid fa-circle-check"></i> Available</span>
 
-                <form action="index.php?action=confirmBooking" method="GET">
+                <form action="index.php?action=confirmBooking" method="POST">
+                    <input type="hidden" name="price" value="<?= htmlspecialchars($_GET['room_price']) ?>">
                     <input type="hidden" name="room_id" value="<?= htmlspecialchars($_GET['room']) ?>">
-
-                    <div class="booking-form-group">
-                        <label class="booking-form-label">Guests</label>
-                        <select name="guests" class="booking-form-input">
-                            <option value="1">1 guest</option>
-                            <option value="2" selected>2 guests</option>
-                            <option value="3">3 guests</option>
-                            <option value="4">4+ guests</option>
-                        </select>
-                    </div>
-
                     <div class="booking-date-row">
                         <div class="booking-form-group">
                             <label class="booking-form-label">Check-in</label>

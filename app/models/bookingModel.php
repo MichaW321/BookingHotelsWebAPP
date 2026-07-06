@@ -75,6 +75,20 @@ class bookingModel{
   $stmt->execute([':id'=>$id]);
   return $stmt->fetchAll();
  }
+
+  public function getUserByID($id){
+        $query="SELECT 
+        users.first_name as 'first_name',
+        users.last_name as 'last_name',
+        users.email as 'email' 
+        FROM users 
+        WHERE users.id=:id";
+        
+        $stmt=$this->db->prepare($query);
+        $stmt->execute([':id'=>$id]);
+
+   return $stmt->fetch();    
+ }
 }
 
 ?>

@@ -25,10 +25,17 @@ class bookingController {
   }
 
   function showConfirmForm() {
-    $id=$_GET['room'];
+    $id=$_POST['room_id'];
+    $check_in=$_POST['check_in'];
+    $check_out=$_POST['check_out'];
+    
+    $user_id=$_SESSION['id'];
+
+
+    $user=$this->booking->getUserByID($user_id);
     $roomAndHotel=$this->booking->getRoomAndHotelByID($id);
-    $roomImages=$this->booking->getRoomImagesByID($id); 
-    $hotelImages=$this->booking->getHotelImagesByID($id);
+    $roomImage=$this->booking->getRoomImagesByID($id); 
+    $hotelImage=$this->booking->getHotelImagesByID($id);
     
     include_once '../app/views/confirmBookingView.php';
 

@@ -112,7 +112,7 @@
                 $<?= htmlspecialchars($room['pricePerNight']) ?>
                 <small>/ night</small>
               </div>
-              <a href="index.php?action=book&room=<?= $room['id'] ?>" class="search-btn" style="padding: 8px 16px; font-size: 13px; border-radius: 6px; text-decoration: none;">
+              <a href="index.php?action=book&room=<?= $room['id'] ?>&room_price=<?= $room['pricePerNight'] ?>" class="search-btn" style="padding: 8px 16px; font-size: 13px; border-radius: 6px; text-decoration: none;">
                 Book now
               </a>
             </div>
