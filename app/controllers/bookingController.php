@@ -36,10 +36,19 @@ class bookingController {
     $roomAndHotel=$this->booking->getRoomAndHotelByID($id);
     $roomImage=$this->booking->getRoomImagesByID($id); 
     $hotelImage=$this->booking->getHotelImagesByID($id);
+    $daysCount=$this->daysDiff($check_in,$check_out);
     
     include_once '../app/views/confirmBookingView.php';
 
   }
+
+   public function daysDiff($date1,$date2){
+   $d1=new DateTime($date1);
+   $d2=new DateTime($date2);
+
+   $interval=$d1->diff($d2);
+   return $interval->days;
+ }
 }
 
 ?>

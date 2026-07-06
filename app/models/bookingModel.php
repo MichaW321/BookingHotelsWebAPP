@@ -89,6 +89,10 @@ class bookingModel{
 
    return $stmt->fetch();    
  }
+
+ public function makeReservation(){
+        
+ }
 }
 
 ?>

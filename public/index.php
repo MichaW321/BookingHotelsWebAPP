@@ -67,5 +67,10 @@ switch($action){
     case 'terms':
     require_once '../app/views/termsView.php';
     break;
+
+    case 'finalizeBooking':
+    $bookingController = new bookingController($db);
+    
+    break;
 }
 ?>

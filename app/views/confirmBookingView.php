@@ -48,7 +48,8 @@
                     <h3 class="confirm-room-title"><?=htmlspecialchars($roomAndHotel['room_type'])?></h3>
                     <div class="room-location">
                         <i class="fa-solid fa-location-dot"></i>
-                        Hotel Address / City
+                        <?=htmlspecialchars($roomAndHotel['city.name'])?> / 
+                        <?=htmlspecialchars($roomAndHotel['address'])?>
                     </div>
                 </div>
             </div>
@@ -97,12 +98,12 @@
             <!-- Price breakdown -->
             <p class="booking-section-label">Price summary</p>
             <div class="confirm-price-line">
-                <span>$75 x 1 night</span>
-                <span>$75</span>
+                <span><?=htmlspecialchars($roomAndHotel['room_price'])?> x 
+                <?=$daysCount?></span>
             </div>
             <div class="confirm-price-line confirm-price-total">
                 <span>Total</span>
-                <span>$75</span>
+                <span>$<?=$roomAndHotel['room_price']*$daysCount?></span>
             </div>
 
             <div class="confirm-policy-box">
@@ -114,6 +115,10 @@
             <form action="index.php" method="POST" class="confirm-form">
                 <input type="hidden" name="action" value="finalizeBooking">
                 <input type="hidden" name="room" value="<?=$id?>">
+                <input type="hidden" name="user" value="<?=$user_id?>">
+                <input type="hidden" name="check_in" value="<?=$check_in?>">
+                <input type="hidden" name="check_out" value="<?=$check_out?>">
+                <input type="hidden" name="price" value="<?=$roomAndHotel['room_price']*$daysCount?>">
 
                 <label class="confirm-terms">
                     <input type="checkbox" name="terms" required>
