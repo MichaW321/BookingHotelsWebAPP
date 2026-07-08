@@ -49,6 +49,36 @@ class bookingController {
    $interval=$d1->diff($d2);
    return $interval->days;
  }
+
+ public function newReservation() {
+  
+  if($_SERVER['REQUEST_METHOD']=='POST'){
+    $room=$_POST['room'] ?? '';
+    $user=$_POST['user'] ?? '';
+    $check_in=$_POST['check_in'] ?? '';
+    $check_out=$_POST['check_out'] ?? '';
+    $price=$_POST['price'] ?? '';
+    $terms=$_POST['terms'] ?? '';
+
+    $errorBooking='';
+
+    if($room=='' || $this->booking->getRoomByID($room,$check_in,$check_out)){
+      $errorBooking='Invalid room selected';
+      return;
+    }
+
+    if($user==''){
+      $errorBooking='Invalid user';
+      return;
+    }
+
+    if(empty($terms)){
+      $errorBooking='U must accept our terms of use';
+      return;
+    }
+
+  }
+ }
 }
 
 ?>

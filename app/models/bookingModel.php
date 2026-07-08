@@ -7,6 +7,24 @@ class bookingModel{
     $this->db=$dbConnection;
   }
 
+  public function isRoomBooked($id,$check_in,$check_out){
+    $query="SELECT *
+            FROM room
+            WHERE room.id = :id AND NOT EXISTS (
+            SELECT 1 FROM reservation
+            WHERE reservation.room_id=:id
+            AND :check_in < reservation.check_out    /* 7.12 12.12   9.12 13.12 */
+            AND :check_out > reservation.check_in)";
+    
+    $stmt=$this->db->prepare($query);
+    $stmt->execute([
+        ':id'=>$id,
+        ':check_in'=>$check_in,
+        ':check_out'=>$check_out
+    ]);
+    return $stmt->fetch() ? true : false;
+  }
+
  public function isRoomBooked($id) {
     $query="SELECT room.id from room WHERE room.id=:id AND room.id NOT IN (SELECT reservation.room_id FROM reservation WHERE reservation.check_in <= CURDATE() AND reservation.check_out >=CURDATE())";
 

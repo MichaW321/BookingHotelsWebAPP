@@ -124,7 +124,7 @@
                     <input type="checkbox" name="terms" required>
                     <span>I agree to Bookify's <a href="index.php?action=terms">Terms of Use</a> and <a href="index.php?action=privacy">Privacy Policy</a>.</span>
                 </label>
-
+                <span><?=$errorBooking?></span>
                 <button type="submit" class="booking-confirm-btn">Confirm booking</button>
             </form>
 
