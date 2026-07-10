@@ -70,7 +70,7 @@ switch($action){
 
     case 'finalizeBooking':
     $bookingController = new bookingController($db);
-    
+    $bookingController->newReservation();
     break;
 }
 ?>

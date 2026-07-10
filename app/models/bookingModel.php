@@ -7,7 +7,7 @@ class bookingModel{
     $this->db=$dbConnection;
   }
 
-  public function isRoomBooked($id,$check_in,$check_out){
+  public function isRoomFree($id,$check_in,$check_out){
     $query="SELECT *
             FROM room
             WHERE room.id = :id AND NOT EXISTS (

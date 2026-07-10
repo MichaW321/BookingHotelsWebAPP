@@ -121,14 +121,16 @@
                 <input type="hidden" name="price" value="<?=$roomAndHotel['room_price']*$daysCount?>">
 
                 <label class="confirm-terms">
-                    <input type="checkbox" name="terms" required>
+                    <input type="checkbox" name="terms" value="1" required>
                     <span>I agree to Bookify's <a href="index.php?action=terms">Terms of Use</a> and <a href="index.php?action=privacy">Privacy Policy</a>.</span>
                 </label>
+                <?php if(!empty($errorBooking)):?>
                 <span><?=$errorBooking?></span>
+                <?php endif; ?>
                 <button type="submit" class="booking-confirm-btn">Confirm booking</button>
             </form>
 
-            <a href="#" class="confirm-cancel-link">Cancel and go back</a>
+            <a href="index.php?action=home" class="confirm-cancel-link">Cancel and go back</a>
 
         </div>
     </div>

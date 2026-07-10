@@ -64,17 +64,14 @@ class bookingController {
 
     if($room=='' || $this->booking->getRoomByID($room,$check_in,$check_out)){
       $errorBooking='Invalid room selected';
-      return;
     }
 
     if($user==''){
       $errorBooking='Invalid user';
-      return;
     }
 
-    if(empty($terms)){
+    if(empty($terms) || $terms!='1'){
       $errorBooking='U must accept our terms of use';
-      return;
     }
 
   }
