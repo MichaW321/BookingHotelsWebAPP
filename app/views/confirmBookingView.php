@@ -112,13 +112,10 @@
             </div>
 
             <!-- Final confirm action -->
-            <form action="index.php" method="POST" class="confirm-form">
-                <input type="hidden" name="action" value="finalizeBooking">
+            <form action="index.php?action=finalizeBooking" method="POST" class="confirm-form">
                 <input type="hidden" name="room" value="<?=$id?>">
-                <input type="hidden" name="user" value="<?=$user_id?>">
                 <input type="hidden" name="check_in" value="<?=$check_in?>">
                 <input type="hidden" name="check_out" value="<?=$check_out?>">
-                <input type="hidden" name="price" value="<?=$roomAndHotel['room_price']*$daysCount?>">
 
                 <label class="confirm-terms">
                     <input type="checkbox" name="terms" value="1" required>

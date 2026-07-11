@@ -54,25 +54,49 @@ class bookingController {
   
   if($_SERVER['REQUEST_METHOD']=='POST'){
     $room=$_POST['room'] ?? '';
-    $user=$_POST['user'] ?? '';
+    $user=$_SESSION['id'] ?? null;
     $check_in=$_POST['check_in'] ?? '';
     $check_out=$_POST['check_out'] ?? '';
-    $price=$_POST['price'] ?? '';
     $terms=$_POST['terms'] ?? '';
 
     $errorBooking='';
 
-    if($room=='' || $this->booking->getRoomByID($room,$check_in,$check_out)){
+    $inDate=DateTime::createFromFormat('Y-m-d',$check_in);
+    $outDate=DateTime::createFromFormat('Y-m-d',$check_out);
+
+    if (!$inDate || $inDate->format('Y-m-d') !== $check_in) {
+        $errorBooking = 'Invalid check-in date.';
+    }
+    if (!$outDate || $outDate->format('Y-m-d') !== $check_out) {
+        $errorBooking = 'Invalid check-out date.';
+    }
+    if ($outDate <= $inDate) {
+        $errorsBooking = 'Check-out date must be after check-in date.';
+    }
+
+    if($room=='' || !$this->booking->isRoomFree($room,$check_in,$check_out)){
       $errorBooking='Invalid room selected';
     }
 
-    if($user==''){
+    if(!$user){
       $errorBooking='Invalid user';
     }
 
     if(empty($terms) || $terms!='1'){
       $errorBooking='U must accept our terms of use';
     }
+
+    if($errorBooking!=''){
+      return ['success'=>false , 'error'=>$errorBooking];
+    }
+
+    $days=$inDate->diff($outDate)->days;
+    $roomData=$this->booking->getRoomByID($room);
+    $price=$roomData['pricePerNight']*$days;
+
+    $result=$this->booking->createReservation($room,$user,$check_in,$check_out,$price);
+
+    return['success'=>true, 'reservation_id'=>$result];
 
   }
  }

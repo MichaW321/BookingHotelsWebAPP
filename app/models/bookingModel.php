@@ -7,18 +7,25 @@ class bookingModel{
     $this->db=$dbConnection;
   }
 
+  public function loggedUser($user_id){
+        $id=$_SESSION['id'];
+
+        return $user_id==$id ? true : false;
+  }
+
   public function isRoomFree($id,$check_in,$check_out){
     $query="SELECT *
             FROM room
             WHERE room.id = :id AND NOT EXISTS (
             SELECT 1 FROM reservation
-            WHERE reservation.room_id=:id
+            WHERE reservation.room_id=:id2
             AND :check_in < reservation.check_out    /* 7.12 12.12   9.12 13.12 */
             AND :check_out > reservation.check_in)";
     
     $stmt=$this->db->prepare($query);
     $stmt->execute([
         ':id'=>$id,
+        ':id2'=>$id,
         ':check_in'=>$check_in,
         ':check_out'=>$check_out
     ]);
@@ -108,8 +115,30 @@ class bookingModel{
    return $stmt->fetch();    
  }
 
- public function makeReservation(){
-        
+ public function getRoomByID($id){
+    $query="SELECT *
+            FROM room WHERE room.id = :id";
+    
+    $stmt=$this->db->prepare($query);
+    $stmt->execute([':id'=>$id]);
+
+    return $stmt->fetch();
+ }
+
+ public function createReservation($room,$user,$check_in,$check_out,$price){
+     $query="INSERT INTO reservation (user_id,room_id,check_in,check_out,total_price)
+             VALUES(:user_id,:room_id,:check_in,:check_out,:total_price)";
+             
+     $stmt=$this->db->prepare($query);
+     $stmt->execute([
+        ':user_id'=>$user,
+        ':room_id'=>$room,
+        ':check_in'=>$check_in,
+        ':check_out'=>$check_out,
+        ':total_price'=>$price
+     ]);
+
+     return $this->db->lastInsertId();
  }
 }
 

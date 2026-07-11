@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-echo "<script src='script.js'></script>";
 
 require_once '../app/controllers/homeController.php';
 require_once '../app/controllers/authController.php';
@@ -69,8 +68,26 @@ switch($action){
     break;
 
     case 'finalizeBooking':
+    
+
     $bookingController = new bookingController($db);
-    $bookingController->newReservation();
+    $result=$bookingController->newReservation();
+
+    if($result['success']){
+        $_SESSION['success_booking']=[
+        'type' => $roomData['type'],
+        'check_in' => $check_in,
+        'check_out' => $check_out,
+        'days' => $days,
+        'price' => $price,
+        'reservation_id' => $result];
+
+    header('Location: index.php?action=confirmation');
+    exit;
+    } else {
+        $errorBooking=$result['error'];
+        echo $errorBooking;
+    }
     break;
 }
 ?>
