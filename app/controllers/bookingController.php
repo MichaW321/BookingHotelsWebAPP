@@ -25,21 +25,18 @@ class bookingController {
   }
 
   function showConfirmForm() {
-    $id=$_POST['room_id'];
-    $check_in=$_POST['check_in'];
-    $check_out=$_POST['check_out'];
-    
-    $user_id=$_SESSION['id'];
+    $id = $_POST['room_id'] ?? '';
+    $check_in = $_POST['check_in'] ?? '';
+    $check_out = $_POST['check_out'] ?? '';
+    $user_id = $_SESSION['id'];
 
-
-    $user=$this->booking->getUserByID($user_id);
-    $roomAndHotel=$this->booking->getRoomAndHotelByID($id);
-    $roomImage=$this->booking->getRoomImagesByID($id); 
-    $hotelImage=$this->booking->getHotelImagesByID($id);
-    $daysCount=$this->daysDiff($check_in,$check_out);
+    $user = $this->booking->getUserByID($user_id);
+    $roomAndHotel = $this->booking->getRoomAndHotelByID($id);
+    $roomImage = $this->booking->getRoomImagesByID($id); 
+    $hotelImage = $this->booking->getHotelImagesByID($id);
+    $daysCount = $this->daysDiff($check_in, $check_out);
     
     include_once '../app/views/confirmBookingView.php';
-
   }
 
    public function daysDiff($date1,$date2){
@@ -50,16 +47,30 @@ class bookingController {
    return $interval->days;
  }
 
+ function showConfirmFormWithError($errorBooking) {
+    $id = $_POST['room'] ?? '';
+    $check_in = $_POST['check_in'] ?? '';
+    $check_out = $_POST['check_out'] ?? '';
+    $user_id = $_SESSION['id'];
+
+    $user = $this->booking->getUserByID($user_id);
+    $roomAndHotel = $this->booking->getRoomAndHotelByID($id);
+    $roomImage = $this->booking->getRoomImagesByID($id); 
+    $hotelImage = $this->booking->getHotelImagesByID($id);
+    $daysCount = $this->daysDiff($check_in, $check_out);
+    
+    include_once '../app/views/confirmBookingView.php';
+}
+
  public function newReservation() {
   
-  if($_SERVER['REQUEST_METHOD']=='POST'){
-    $room=$_POST['room'] ?? '';
+  if($_SERVER['REQUEST_METHOD']=='POST' || $_SERVER['REQUEST_METHOD']=='GET'){
+    $room=$_POST['room'] ?? $_GET['room'] ?? '';
     $user=$_SESSION['id'] ?? null;
-    $check_in=$_POST['check_in'] ?? '';
-    $check_out=$_POST['check_out'] ?? '';
-    $terms=$_POST['terms'] ?? '';
+    $check_in=$_POST['check_in'] ?? $_GET['check_in'] ?? '';
+    $check_out=$_POST['check_out'] ?? $_GET['check_out'] ?? '';
+    $terms=$_POST['terms'] ?? $_GET['terms'] ?? '';
 
-    $errorBooking='';
 
     $inDate=DateTime::createFromFormat('Y-m-d',$check_in);
     $outDate=DateTime::createFromFormat('Y-m-d',$check_out);
@@ -96,7 +107,15 @@ class bookingController {
 
     $result=$this->booking->createReservation($room,$user,$check_in,$check_out,$price);
 
-    return['success'=>true, 'reservation_id'=>$result];
+    return [
+            'success' => true,
+            'reservation_id' => $reservationId,
+            'type' => $roomData['type'],
+            'check_in' => $check_in,
+            'check_out' => $check_out,
+            'days' => $days,
+            'price' => $price,
+        ];
 
   }
  }

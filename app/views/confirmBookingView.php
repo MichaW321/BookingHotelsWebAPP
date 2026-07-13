@@ -118,7 +118,7 @@
                 <input type="hidden" name="check_out" value="<?=$check_out?>">
 
                 <label class="confirm-terms">
-                    <input type="checkbox" name="terms" value="1" required>
+                    <input type="checkbox" name="terms" value="1">
                     <span>I agree to Bookify's <a href="index.php?action=terms">Terms of Use</a> and <a href="index.php?action=privacy">Privacy Policy</a>.</span>
                 </label>
                 <?php if(!empty($errorBooking)):?>
