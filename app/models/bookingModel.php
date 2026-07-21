@@ -140,6 +140,117 @@ class bookingModel{
 
      return $this->db->lastInsertId();
  }
+ public function searchRooms($city, $check_in, $check_out){
+    $query = "SELECT
+              room.id as 'room_id',
+              room.type as 'room_type',
+              room.beds as 'room_beds',
+              room.balcony as 'room_balcony',
+              room.pricePerNight as 'room_price',
+              hotel.name as 'hotel_name',
+              city.name as 'city_name',
+              country.name as 'country_name',
+              (SELECT room_image.path FROM room_image
+                WHERE room_image.room_id = room.id LIMIT 1) as 'room_path'
+              FROM room
+              INNER JOIN hotel ON room.hotel_id = hotel.id
+              INNER JOIN location ON hotel.location_id = location.id
+              INNER JOIN city ON location.city_id = city.id
+              INNER JOIN country ON city.country_id = country.id
+              WHERE city.name LIKE :city
+              AND room.id NOT IN (
+                  SELECT reservation.room_id FROM reservation
+                  WHERE :check_in < reservation.check_out
+                  AND :check_out > reservation.check_in
+              )
+              ORDER BY room.pricePerNight ASC";
+
+    $stmt = $this->db->prepare($query);
+    $stmt->execute([
+        ':city'      => '%' . $city . '%',
+        ':check_in'  => $check_in,
+        ':check_out' => $check_out
+    ]);
+
+    return $stmt->fetchAll();
+ }
+
+ public function getReservationsPaginated(int $limit, int $offset, string $search = ''): array {
+    $sql = "SELECT r.*, u.username, u.email, rm.type AS room_type 
+            FROM reservation r 
+            JOIN users u ON r.user_id = u.id 
+            JOIN room rm ON r.room_id = rm.id 
+            WHERE u.username LIKE :search1 OR rm.type LIKE :search2
+            ORDER BY r.check_in DESC 
+            LIMIT :limit OFFSET :offset";
+
+    $stmt = $this->db->prepare($sql);
+    
+    $searchTerm = '%' . $search . '%';
+    $stmt->bindValue(':search1', $searchTerm);
+    $stmt->bindValue(':search2', $searchTerm);
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    
+    $stmt->execute();
+
+    return $stmt->fetchAll();
 }
+public function getTotalReservationsCount(string $search = ''): int {
+    $sql = "SELECT COUNT(*) FROM reservation r 
+            JOIN users u ON r.user_id = u.id 
+            JOIN room rm ON r.room_id = rm.id 
+            WHERE u.username LIKE :search1 OR rm.type LIKE :search2";
+
+    $stmt = $this->db->prepare($sql);
+    
+    $searchTerm = '%' . $search . '%';
+    $stmt->bindValue(':search1', $searchTerm);
+    $stmt->bindValue(':search2', $searchTerm);
+    
+    $stmt->execute();
+    return (int) $stmt->fetchColumn();
+}
+public function getAllRooms(): array {
+    $stmt = $this->db->query("SELECT * FROM room ORDER BY id DESC");
+    return $stmt->fetchAll();
+}
+
+public function insertRoom(string $type, float $price, int $capacity): bool {
+    $stmt = $this->db->prepare("INSERT INTO room (type, pricePerNight, beds) VALUES (:type, :price, :capacity)");
+    return $stmt->execute([
+        ':type' => $type,
+        ':price' => $price,
+        ':capacity' => $capacity
+    ]);
+}
+
+public function deleteRoom(int $roomId): bool {
+    $stmt = $this->db->prepare("DELETE FROM room WHERE id = :id");
+    return $stmt->execute([':id' => $roomId]);
+}
+
+public function createUser(string $username, string $firstName, string $lastName, string $email, string $password, string $role): bool {
+    $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+    
+    $sql = "INSERT INTO users (username, first_name, last_name, email, password, role) 
+            VALUES (:username, :first_name, :last_name, :email, :password, :role)";
+            
+    $stmt = $this->db->prepare($sql);
+    return $stmt->execute([
+        ':username'   => $username,
+        ':first_name' => $firstName,
+        ':last_name'  => $lastName,
+        ':email'      => $email,
+        ':password'   => $hashedPassword,
+        ':role'       => $role
+    ]);
+}
+public function deleteReservation(int $id): bool {
+    $stmt = $this->db->prepare("DELETE FROM reservation WHERE id = :id");
+    return $stmt->execute([':id' => $id]);
+}
+}
+
 
 ?>

@@ -15,10 +15,10 @@
                 <a href="index.php">Book<span>ify</span></a>
             </div>
             <nav class="navbar-inline">
-                <a href="#" class="nav-item"><i class="fa-solid fa-hotel"></i> All Hotels</a>
-                <a href="#" class="nav-item"><i class="fa-solid fa-building"></i> Apartments</a>
-                <a href="#" class="nav-item"><i class="fa-solid fa-umbrella-beach"></i> Resorts</a>
-                <a href="#" class="nav-item"><i class="fa-solid fa-house-chimney-window"></i> Villas & Cabins</a>
+                <a href="index.php?action=home" class="nav-item active"><i class="fa-solid fa-hotel"></i> Home</a>
+            <a href="index.php?action=about" class="nav-item"><i class="fa-solid fa-building"></i> About us</a>
+            <a href="index.php?action=terms" class="nav-item"><i class="fa-solid fa-umbrella-beach"></i> Terms of use</a>
+            <a href="index.php?action=privacy" class="nav-item"><i class="fa-solid fa-house-chimney-window"></i>Privacy policy</a>
             </nav>
             <div class="auth-buttons">
                 <a href="index.php?action=register" class="btn-auth btn-register">Register</a>
@@ -66,9 +66,9 @@
   </div>
   <p class="footer-copy">© 2024 Bookify. All rights reserved.</p>
   <nav class="footer-links">
-    <a href="#">Privacy Policy</a>
-    <a href="#">Terms of Use</a>
-    <a href="#">Support</a>
+    <a href="index.php?action=privacy">Privacy Policy</a>
+    <a href="index.php?action=terms">Terms of Use</a>
+    <a href="index.php?action=about">About us</a>
   </nav>
 </footer>
 </body>

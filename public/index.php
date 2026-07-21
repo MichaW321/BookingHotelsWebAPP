@@ -1,11 +1,19 @@
 <?php
 session_start();
+ob_start();
 
 echo '<script src="script.js"></script>';
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
 
 require_once '../app/controllers/homeController.php';
 require_once '../app/controllers/authController.php';
 require_once '../app/controllers/bookingController.php';
+require_once '../app/controllers/searchController.php';
+require_once '../app/controllers/adminController.php';
+require_once '../app/controllers/managerController.php';
+require_once '../app/helpers/logger.php';
 
 require_once '../app/models/userModel.php';
 require_once '../app/models/hotelModel.php';
@@ -23,6 +31,24 @@ switch($action){
     $homeController->index();
     break;
     
+    case 'admin':
+        require_once '../app/controllers/adminController.php';
+        $adminCtrl = new adminController($db);
+        $adminCtrl->index();
+    break;
+
+    case 'adminExportPdf':
+        require_once '../app/controllers/adminController.php';
+        $adminCtrl = new adminController($db);
+        $adminCtrl->exportPdf();
+    break;
+
+    case 'adminExportExcel':
+        require_once '../app/controllers/adminController.php';
+        $adminCtrl = new adminController($db);
+        $adminCtrl->exportExcel();
+    break;
+
     case 'register':
     $authController = new authController($db);
     $authController->register();
@@ -74,7 +100,7 @@ switch($action){
 
     if ($result['success']) {
         $_SESSION['success_booking'] = $result;
-        header('Location: index.php?action=confirmation&reservation_id=1');
+        header('Location: index.php?action=confirmation');
         exit;
     } else {
         $errorBooking = $result['error'];
@@ -83,8 +109,46 @@ switch($action){
     break;
 
     case 'confirmation':
-    $reservation_id=$_GET['reservation_id'];
+    if (empty($_SESSION['success_booking'])){
+        header('Location: index.php?action=home');
+        exit;
+    }
+    $result=$_SESSION['success_booking'];
+    unset($_SESSION['success_booking']);
     require_once '../app/views/confirmationView.php';
     break;
+
+    case 'search':
+    $searchController = new searchController($db);
+    $searchController->showSearched();
+    break;
+
+    case 'about':
+        require_once '../app/views/about.php';
+    break;
+
+case 'adminUpdateRole':
+    (new adminController($db))->updateUserRole();
+    break;
+case 'adminDeleteUser':
+    (new adminController($db))->deleteUser();
+    break;
+case 'adminDeleteRoom':
+    (new adminController($db))->deleteRoom();
+    break;
+case 'adminAddUser':
+    require_once '../app/controllers/adminController.php';
+    (new adminController($db))->addUser();
+    break;
+case 'manager':
+    (new managerController($db))->index();
+    break;
+
+case 'managerDeleteReservation':
+    (new managerController($db))->deleteReservation();
+    break;
+    default:
+        header('Location: index.php?action=home');
+        exit;
 }
 ?>

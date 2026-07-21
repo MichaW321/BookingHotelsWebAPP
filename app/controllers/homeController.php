@@ -8,7 +8,7 @@ class homeController {
       }
       public function index() {
         $rooms = $this->getRooms();
-        
+        //dump($rooms); // see what homeViewRooms() returned
         include_once '../app/views/homeView.php';
       }
 

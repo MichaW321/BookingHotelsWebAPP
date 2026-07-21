@@ -48,6 +48,7 @@ class authController{
      $result=$this->user->insertUser($username,$firstName,$lastName,$email,$password);
 
      if($result){
+      Logger::log("Korisnik uspešno registrovan (Username: {$username}).");
       header("Location: index.php?action=login");
       exit;
      } else { die("Problem creating new user");}
@@ -88,12 +89,15 @@ class authController{
 
       $modelUser=$this->user->getUserByUsername($username);
       if(($modelUser) && (password_verify($password,$modelUser['password']))) {
-          $_SESSION['id']=$modelUser['id'];
-          $_SESSION['username']=$modelUser['username'];
 
+      $_SESSION['id'] = $modelUser['id'];
+      $_SESSION['username'] = $modelUser['username'];
+      $_SESSION['role'] = $modelUser['role'];
+          Logger::log("Uspešna prijava na sistem.");
           header("Location: index.php?action=home");
           exit();
       } else {
+        Logger::log("Neuspešna prijava na sistem.");
         $errorLogin="Username and password don't match";
         require_once '../app/views/loginView.php';
         return;
@@ -112,6 +116,7 @@ class authController{
   
   public function logout() {
     if($this->isLoggedIn()){
+      Logger::log("Korisnik se odjavio sa sistema.");
       $_SESSION=array();
       session_destroy();
       header("Location: index.php?action=home");

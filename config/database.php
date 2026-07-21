@@ -1,7 +1,7 @@
 <?php 
 // A php file where we will initialize database (create tables if not exists and database)
 
-$host='localhost';
+$host='db';
 $user='root';
 $pass='';
 $db='bookify';
@@ -33,7 +33,7 @@ $queries=[
     name VARCHAR(100) NOT NULL,
     country_id INT NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (country_id) REFERENCES country(id)
+    FOREIGN KEY (country_id) REFERENCES country(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;",
 
 "CREATE TABLE IF NOT EXISTS location (
@@ -41,7 +41,7 @@ $queries=[
     city_id INT NOT NULL,
     address VARCHAR(100) NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (city_id) REFERENCES city(id)
+    FOREIGN KEY (city_id) REFERENCES city(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;",
 
 "CREATE TABLE IF NOT EXISTS hotel (
@@ -53,7 +53,7 @@ $queries=[
     email varchar(100) NOT NULL,
     phone varchar(100) NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (location_id) REFERENCES location(id)
+    FOREIGN KEY (location_id) REFERENCES location(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;",
 
   "CREATE TABLE IF NOT EXISTS hotel_image(
@@ -62,7 +62,7 @@ $queries=[
   path varchar(255) not null,
   hotel_id int not null,
   primary key(id),
-  foreign key(hotel_id) references hotel(id)
+  foreign key(hotel_id) references hotel(id) ON DELETE CASCADE
   )Engine=InnoDB;",
 
   "CREATE TABLE IF NOT EXISTS room (
@@ -74,7 +74,7 @@ $queries=[
   description text not null,
   hotel_id int not null,
   primary key(id),
-  foreign key(hotel_id) references hotel(id)
+  foreign key(hotel_id) references hotel(id) ON DELETE CASCADE
   )Engine=InnoDB;",
 
   "CREATE TABLE IF NOT EXISTS room_image(
@@ -83,7 +83,7 @@ $queries=[
   path varchar(255) not null,
   room_id int not null,
   primary key(id),
-  foreign key(room_id) references room(id)
+  foreign key(room_id) references room(id) ON DELETE CASCADE
   )Engine=InnoDB;",
 
   "CREATE TABLE IF NOT EXISTS users (
@@ -106,8 +106,8 @@ $queries=[
     total_price DECIMAL(10,2) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (room_id) REFERENCES room(id)
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (room_id) REFERENCES room(id) ON DELETE CASCADE
   ) ENGINE=InnoDB;"];
   try{
   foreach($queries as $query){

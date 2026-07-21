@@ -13,20 +13,33 @@
             <div class="logo">
                 <a href="index.php?action=home">Book<span>ify</span></a>
             </div>
+<div class="auth-buttons">
+    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+        <a href="index.php?action=admin" class="btn-auth" style="background-color: #d9534f; color: white;">
+            <i class="fa-solid fa-user-gear"></i> Admin Panel
+        </a>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'manager')): ?>
+        <a href="index.php?action=manager" class="btn-auth" style="background-color: #f0ad4e; color: white;">
+            <i class="fa-solid fa-chart-line"></i> Manager Panel
+        </a>
+    <?php endif; ?>
+</div>
             <nav class="navbar-inline">
-            <a href="#" class="nav-item active"><i class="fa-solid fa-hotel"></i> All Hotels</a>
-            <a href="#" class="nav-item"><i class="fa-solid fa-building"></i> Apartments</a>
-            <a href="#" class="nav-item"><i class="fa-solid fa-umbrella-beach"></i> Resorts</a>
-            <a href="#" class="nav-item"><i class="fa-solid fa-house-chimney-window"></i> Villas & Cabins</a>
+            <a href="index.php?action=home" class="nav-item active"><i class="fa-solid fa-hotel"></i> Home</a>
+            <a href="index.php?action=about" class="nav-item"><i class="fa-solid fa-building"></i> About us</a>
+            <a href="index.php?action=terms" class="nav-item"><i class="fa-solid fa-umbrella-beach"></i> Terms of use</a>
+            <a href="index.php?action=privacy" class="nav-item"><i class="fa-solid fa-house-chimney-window"></i>Privacy policy</a>
         </nav>
         <?php if(isset($_SESSION['id'])): ?>
             <div class="auth-buttons">
-                <a href="index.php?action=logoutConfirm" class="btn-auth btn-register">Logout</a
+                <a href="index.php?action=logoutConfirm" class="btn-auth btn-register">Logout</a>
             </div>
         <?php else: ?>
             <div class="auth-buttons">
                 <a href="index.php?action=register" class="btn-auth btn-login">Register</a>
-                <a href="index.php?action=login" class="btn-auth btn-register">Sign In</a
+                <a href="index.php?action=login" class="btn-auth btn-register">Sign In</a>
             </div>
         <?php endif; ?>       
         </div>
@@ -41,35 +54,26 @@
             </div>
 
             <div class="search-container">
-                <form class="search-form" action="" method="GET">
-                    <div class="input-group">
-                        <label><i class="fa-solid fa-bed"></i></label>
-                        <input type="text" name="destination" placeholder="Where are you going?" required>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label><i class="fa-solid fa-calendar-days"></i></label>
-                        <input type="text" name="check_in" placeholder="Check-in Date" onfocus="(this.type='date')" required>
-                    </div>
-                    <div class="input-group">
-                        <label><i class="fa-solid fa-calendar-days"></i></label>
-                        <input id= type="text" name="check_in" placeholder="Check-out Date" onfocus="(this.type='date')" required>
+                <form class="search-form" action="index.php" method="GET">
+    <input type="hidden" name="action" value="search">
 
-                    </div>
-                    <div class="input-group">
-                        <label><i class="fa-solid fa-user"></i></label>
-                        <select name="guests">
-                            <option value="1">1 guest</option>
-                            <option value="2" selected>2 guests</option>
-                            <option value="3">3 guests</option>
-                            <option value="4">4+ guests</option>
-                        </select>
-                    </div>
+    <div class="input-group">
+        <label for="city"><i class="fa-solid fa-location-dot"></i></label>
+        <input type="text" id="city" name="city" placeholder="Where are you going?" required>
+    </div>
 
-                    <button type="submit" name="submit_search" class="search-btn">
-                        Search
-                    </button>
-                </form>
+    <div class="input-group">
+        <label for="check_in"><i class="fa-solid fa-calendar-days"></i></label>
+        <input type="date" id="check_in" name="check_in" required>
+    </div>
+
+    <div class="input-group">
+        <label for="check_out"><i class="fa-solid fa-calendar-days"></i></label>
+        <input type="date" id="check_out" name="check_out" required>
+    </div>
+
+    <button type="submit" class="search-btn">Search</button>
+</form>
             </div>
         </div>
     </section>
@@ -84,7 +88,7 @@
       <?php foreach ($rooms as $room): ?>
         <div class="room-card">
           <div class="room-img-placeholder">
-            <img src="<?=$room['room_path']?>" alt="<?=$room['room_image']?>">
+            <img src="<?= htmlspecialchars($room['room_path']) ?>" alt="<?= htmlspecialchars($room['room_image']) ?>">
           </div>
           <div class="room-body">
             <span class="room-badge">
@@ -112,8 +116,9 @@
                 $<?= htmlspecialchars($room['pricePerNight']) ?>
                 <small>/ night</small>
               </div>
-              <a href="index.php?action=book&room=<?= $room['id'] ?>&room_price=<?= $room['pricePerNight'] ?>" class="search-btn" style="padding: 8px 16px; font-size: 13px; border-radius: 6px; text-decoration: none;">
-                Book now
+              <a href="index.php?action=book&room=<?= urlencode($room['id']) ?>"
+                 class="booking-confirm-btn" style="width:auto; padding:8px 18px;">
+                View
               </a>
             </div>
           </div>
@@ -129,9 +134,9 @@
   </div>
   <p class="footer-copy">© 2026 Bookify. All rights reserved.</p>
   <nav class="footer-links">
-    <a href="#">Privacy Policy</a>
-    <a href="#">Terms of Use</a>
-    <a href="#">Support</a>
+    <a href="index.php?action=privacy">Privacy Policy</a>
+    <a href="index.php?action=terms">Terms of Use</a>
+    <a href="index.php?action=about">About us</a>
   </nav>
 </footer>
 

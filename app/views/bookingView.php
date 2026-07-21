@@ -14,11 +14,24 @@
         <div class="logo">
             <a href="index.php?action=home">Book<span>ify</span></a>
         </div>
+        <div class="auth-buttons">
+    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+        <a href="index.php?action=admin" class="btn-auth" style="background-color: #d9534f; color: white;">
+            <i class="fa-solid fa-user-gear"></i> Admin Panel
+        </a>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'manager')): ?>
+        <a href="index.php?action=manager" class="btn-auth" style="background-color: #f0ad4e; color: white;">
+            <i class="fa-solid fa-chart-line"></i> Manager Panel
+        </a>
+    <?php endif; ?>
+</div>
         <nav class="navbar-inline">
-            <a href="#" class="nav-item active"><i class="fa-solid fa-hotel"></i> All Hotels</a>
-            <a href="#" class="nav-item"><i class="fa-solid fa-building"></i> Apartments</a>
-            <a href="#" class="nav-item"><i class="fa-solid fa-umbrella-beach"></i> Resorts</a>
-            <a href="#" class="nav-item"><i class="fa-solid fa-house-chimney-window"></i> Villas & Cabins</a>
+            <a href="index.php?action=home" class="nav-item active"><i class="fa-solid fa-hotel"></i> Home</a>
+            <a href="index.php?action=about" class="nav-item"><i class="fa-solid fa-building"></i> About us</a>
+            <a href="index.php?action=terms" class="nav-item"><i class="fa-solid fa-umbrella-beach"></i> Terms of use</a>
+            <a href="index.php?action=privacy" class="nav-item"><i class="fa-solid fa-house-chimney-window"></i>Privacy policy</a>
         </nav>
         <?php if(isset($_SESSION['id'])): ?>
             <div class="auth-buttons">
@@ -112,7 +125,7 @@
                 <span class="badge-available"><i class="fa-solid fa-circle-check"></i> Available</span>
 
                 <form action="index.php?action=confirmBooking" method="POST">
-                    <input type="hidden" name="price" value="<?= htmlspecialchars($_GET['room_price']) ?>">
+                    <input type="hidden" name="price" value="<?= htmlspecialchars($roomAndHotel['room_price']) ?>">
                     <input type="hidden" name="room_id" value="<?= htmlspecialchars($_GET['room']) ?>">
                     <div class="booking-date-row">
                         <div class="booking-form-group">
@@ -137,9 +150,9 @@
     <div class="footer-logo"><a href="index.php">Book<span>ify</span></a></div>
     <p class="footer-copy">© 2026 Bookify. All rights reserved.</p>
     <nav class="footer-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Use</a>
-        <a href="#">Support</a>
+        <a href="index.php?action=privacy">Privacy Policy</a>
+    <a href="index.php?action=terms">Terms of Use</a>
+    <a href="index.php?action=about">About us</a>
     </nav>
 </footer>
 

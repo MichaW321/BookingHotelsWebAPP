@@ -12,17 +12,23 @@ class bookingController {
   }
 
   function showBookingForm(){
-    $id=$_GET['room'];
-    if(!($this->booking->isRoomBooked($id))){
-      header("Location: index.php?action=home");
-      exit();
+    $id = $_GET['room'];
+    $check_in = $_GET['check_in'] ?? '';
+    $check_out = $_GET['check_out'] ?? '';
+
+    if ($check_in && $check_out) {
+        if (!$this->booking->isRoomFree($id, $check_in, $check_out)) {
+            header("Location: index.php?action=home");
+            exit();
+        }
     }
-   $roomAndHotel=$this->booking->getRoomAndHotelByID($id);
-   $roomImages=$this->booking->getRoomImagesByID($id); 
-   $hotelImages=$this->booking->getHotelImagesByID($id);
-   
-   include_once '../app/views/bookingView.php';
-  }
+
+    $roomAndHotel = $this->booking->getRoomAndHotelByID($id);
+    $roomImages = $this->booking->getRoomImagesByID($id); 
+    $hotelImages = $this->booking->getHotelImagesByID($id);
+
+    include_once '../app/views/bookingView.php';
+}
 
   function showConfirmForm() {
     $id = $_POST['room_id'] ?? '';
@@ -105,7 +111,8 @@ class bookingController {
     $roomData=$this->booking->getRoomByID($room);
     $price=$roomData['pricePerNight']*$days;
 
-    $result=$this->booking->createReservation($room,$user,$check_in,$check_out,$price);
+    $reservationId=$this->booking->createReservation($room,$user,$check_in,$check_out,$price);
+    Logger::log("Kreirana rezervacija ID {$reservationId} za sobu ID {$room}.");
 
     return [
             'success' => true,

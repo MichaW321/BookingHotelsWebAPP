@@ -9,7 +9,7 @@ class Connection {
 
   public static function connect() {
     if(self::$instance == null) {
-        $host='localhost';
+        $host='db';
         $db='bookify';
         $user='root';
         $pass='';
